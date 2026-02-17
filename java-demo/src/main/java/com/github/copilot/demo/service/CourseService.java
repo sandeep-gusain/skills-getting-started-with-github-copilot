@@ -60,8 +60,11 @@ public class CourseService {
     }
 
     public List<Course> findByInstructor(String instructor) {
+        if (instructor == null) {
+            return new ArrayList<>();
+        }
         return courses.stream()
-                .filter(course -> course.getInstructor().equalsIgnoreCase(instructor))
+                .filter(course -> course.getInstructor() != null && course.getInstructor().equalsIgnoreCase(instructor))
                 .toList();
     }
 }

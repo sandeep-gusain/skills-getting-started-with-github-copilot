@@ -66,8 +66,11 @@ public class StudentService {
 
     // Search students by major
     public List<Student> findByMajor(String major) {
+        if (major == null) {
+            return new ArrayList<>();
+        }
         return students.stream()
-                .filter(student -> student.getMajor().equalsIgnoreCase(major))
+                .filter(student -> student.getMajor() != null && student.getMajor().equalsIgnoreCase(major))
                 .toList();
     }
 
