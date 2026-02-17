@@ -40,6 +40,10 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+        // Validate course and required fields
+        if (course == null || course.getCode() == null || course.getName() == null) {
+            return ResponseEntity.badRequest().build();
+        }
         Course created = courseService.createCourse(course);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }

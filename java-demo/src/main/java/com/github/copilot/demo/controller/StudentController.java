@@ -45,8 +45,9 @@ public class StudentController {
     // POST create new student
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
-        // Validate student and email using service
-        if (student == null || student.getEmail() == null || !studentService.isValidEmail(student.getEmail())) {
+        // Validate student and required fields
+        if (student == null || student.getName() == null || student.getEmail() == null 
+            || !studentService.isValidEmail(student.getEmail())) {
             return ResponseEntity.badRequest().build();
         }
         Student created = studentService.createStudent(student);
